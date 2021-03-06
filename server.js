@@ -19,28 +19,31 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.json());
+app.use(express.static(__dirname + "/public")); //use static files in ROOT/public folder
 
-const sayHi = (req, res) => {
-  //a = parseInt(req.params.a)
-
-  res.send("Hi!");
-};
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.post("/add", (req, res) => {
-  //a = parseInt(req.body)
-  //console.log(a)
   
-   const { a,b } = req.body;
-  res.send({
-      result: parseInt(a) + parseInt(b)
+   const { val } = req.body;
+   date_=val.split('T')[0]
+        yyyy=date_.split('-')[0]    
+        mm=date_.split('-')[1]    
+        dd=date_.split('-')[2]    
+        date_ = dd + "/" + mm + "/" + yyyy;
 
+  res.send({
+      result: date_ 
+      
   });
 });
 
 app.listen(5000, () => {
   console.log(`Server is running on port 5000.`);
+   if (process.send) {
+        process.send('online');
+    }
 });
