@@ -1,10 +1,4 @@
 
-    //created_at=req.created_at.split('T')[0]
-    //yyyy=created_at.split('-')[0]    
-    //mm=created_at.split('-')[1]    
-    //dd=created_at.split('-')[2]    
-    
-    //create_at = dd + "/" + mm + "/" + yyyy;
 
 //app.post("/ad", (req,res) => {
 //const {a,b}=req.params
@@ -20,13 +14,14 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public")); //use static files in ROOT/public folder
+app.use('/assets', express.static('assets'))
 
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.post("/add", (req, res) => {
+app.post('/add', (req, res) => {
   
    const { val } = req.body;
    date_=val.split('T')[0]
@@ -43,7 +38,4 @@ app.post("/add", (req, res) => {
 
 app.listen(5000, () => {
   console.log(`Server is running on port 5000.`);
-   if (process.send) {
-        process.send('online');
-    }
 });
