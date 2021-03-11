@@ -1,78 +1,104 @@
 <html>
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel=stylesheet href=assets/style.css>
 
-<link rel=icon href=https://github.com/github.png/>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel=stylesheet href=assets/style.css>
+
+    <link rel=icon href=https://github.com/github.png />
 
 </head>
 <script>
-  document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
-  ':35729/livereload.js?snipver=1"></' + 'script>')
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+        ':35729/livereload.js?snipver=1"></' + 'script>')
 </script>
 
 <body>
     <div class=container>
         <h3></h3>
-    <h4>Date Convert</h3>
-        <label>Date</label>
-        <input id=val size=30 />
-        <button id=btn_convert class=btn>Convert!</button>
-      <div id=res style=margin:30px>Res</div>
-      
-<a href=https://github.com/tik9/rest-test>Source on Github</a> |
-<a href=tik9.github.io>Homepage</a><br>
-Made in: Germany
+
+        <h4>Calculator App</h4>
+
+        <div style="margin-top: 40px;"></div>
+
+        <input id=result>
+        <div style="margin-top: 20px;"></div>
+        <div id=keypad></div>
+        <div style="margin-top: 20px;"></div>
+
+        <button class="button" id=clear>clear</button>
+
+        <div style="margin-top: 60px;"></div>
+
+        <a href=https://github.com/tik9/rest-test/blob/master/index.html>Source on Github</a> |
+        <a href=https://tik9.github.io/rest-test>Homepage</a>
 
     </div>
 
-<!--
-<script src="{process.env.BROWSER_REFRESH_URL}"></script>
--->
+    <script>
+        result = document.getElementById('result')
+        keypad = document.getElementById('keypad')
+        clear = document.getElementById('clear')
+        clear.className='btn'
+        // button = document.createElement('button')
+        // button.textContent = 1
+        // keypad.appendChild(button)
+        result.value = '12'
+        // keypad.textContent = '1234'
 
-<script>
-    title='Api Tiko'
-    
-    document.getElementsByTagName('h3').textContent=title;
-    document.title=title
-
-    var slideSource = document.getElementById('res');
-    
-    var date = new Date();
-     document.getElementById('val').value = date.toISOString();
-     
-    document.getElementById('btn_convert').addEventListener('click', sendData);
- function sendData(e) {
-        e.preventDefault();
-        const val = document.querySelector('#val').value;
+        var doc = document;
         
-        fetch('/add', {
-            method: 'POST',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                val: val
+        var docFrag = doc.createDocumentFragment();
+        var symbols = ['-', '/', '+','*']
+        for (var symbol of symbols) {
+            var button = document.createElement('button')
+            button.textContent = symbol
+            button.className = 'btn'
+
+            button.addEventListener('click', e => {
+                result.value += e.currentTarget.textContent
+                console.log(symbol)
+
             })
+            docFrag.appendChild(button)
+        }
+        clear.addEventListener('click', e => {
+            result.value = ''
         })
-        .then(res => res.json())
-        .then(data => {
-            const {
-                result
-            } = data;
-            slideSource.textContent = result
-            if(slideSource.className){
-        slideSource.className = '';
-    } else {
-        slideSource.className = 'fade';
-    }
-            // console.log(result)
+
+
+        equal = doc.createElement('button')
+        equal.textContent = '='
+        equal.style.fontweight = '1000'
+        equal.addEventListener('click', e => {
+            result.value = eval(result.value)
         })
-        .catch(err => console.log(err));
-   //console.log('end')
-}
-</script>
+        docFrag.appendChild(equal)
+        docFrag.appendChild(document.createElement('br'))
+
+        for (var x = 1; x < 10; x++) {
+            var button = doc.createElement('button');
+            button.textContent = x;
+            button.className = 'btn'
+            docFrag.appendChild(button);
+            button.addEventListener('click', e => {
+                // console.clear()
+                // console.log(e.currentTarget)
+                result.value += e.currentTarget.textContent
+            })
+            if (x % 3 == 0) {
+                docFrag.appendChild(document.createElement('br'))
+            }
+        }
+
+        keypad.appendChild(docFrag);
+
+        title = 'Api Tiko'
+
+        document.querySelector('h3').textContent = title;
+        document.title = title
+
+
+    </script>
 
 </body>
 

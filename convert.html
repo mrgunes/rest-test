@@ -1,0 +1,79 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel=stylesheet href=assets/style.css>
+
+<link rel=icon href=https://github.com/github.png/>
+
+</head>
+<script>
+  document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+  ':35729/livereload.js?snipver=1"></' + 'script>')
+</script>
+
+<body>
+    <div class=container>
+        <h3></h3>
+    <h4>Date Convert</h3>
+        <label>Date</label>
+        <input id=val size=30 />
+        <button id=btn_convert class=btn>Convert!</button>
+      <div id=res style=margin:30px>Res</div>
+      
+<a href=https://github.com/tik9/rest-test>Source on Github</a> |
+<a href=tik9.github.io>Homepage</a><br>
+Made in: Germany
+
+    </div>
+
+<!--
+<script src="{process.env.BROWSER_REFRESH_URL}"></script>
+-->
+
+<script>
+    title='Api Tiko'
+    
+    document.getElementsByTagName('h3').textContent=title;
+    document.title=title
+
+    var slideSource = document.getElementById('res');
+    
+    var date = new Date();
+     document.getElementById('val').value = date.toISOString();
+     
+    document.getElementById('btn_convert').addEventListener('click', sendData);
+ function sendData(e) {
+        e.preventDefault();
+        const val = document.querySelector('#val').value;
+        
+        fetch('/add', {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                val: val
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            const {
+                result
+            } = data;
+            slideSource.textContent = result
+            if(slideSource.className){
+        slideSource.className = '';
+    } else {
+        slideSource.className = 'fade';
+    }
+            // console.log(result)
+        })
+        .catch(err => console.log(err));
+   //console.log('end')
+}
+</script>
+
+</body>
+
+</html>
