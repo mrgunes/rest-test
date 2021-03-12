@@ -1,8 +1,16 @@
 #slideSource {
   opacity: 1;
-  transition: opacity 1s; 
-}
+  transition: opacity 1s; }
 
 #slideSource.fade {
-  opacity: 0;
-}
+  opacity: 0; }
+
+footer {
+  margin-top: 60px; }
+
+h3, h4 {
+  margin-bottom: 40px; }
+
+li {
+  float: left;
+  margin: 0 15px; }
