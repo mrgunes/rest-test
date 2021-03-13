@@ -1,65 +1,69 @@
 <html>
-<head>
-
-
-<link rel=icon href=https://github.com/github.png/>
-
-</head>
 
 <body>
     <div class=container>
         <h3></h3>
-    <h4>Date Convert</h3>
+        <header></header>
+        <h4>Date Convert</h4>
 
-        <label>Date</label>
-        <input id=val size=30 />
-        <button id=btn_convert class=btn>Convert!</button>
-      <div id=res style=margin:30px>Res</div>
-      
-<footer></footer>
+        <div class="col-auto"> <label for=inputval>Date</label>
+            <input id=inputval class="form-control" placeholder="date in ISO Format or in seconds">
+        </div>
+        <button id=btn_convert class='btn btn-primary'>Convert!</button>
+Example ISO: <button id=btn1 class='example btn'></button>
+        Sec.:<button id=btn2 class="example btn"></button>
+        <div id=res style=margin:30px>Res</div>
+
+        <div id=ghlink></div>
+        <footer></footer>
     </div>
 
 
-<script>
+    <script>
+        inputval = document.querySelector('#inputval');
 
-    var slideSource = document.getElementById('res');
-    
-    var date = new Date();
-     document.getElementById('val').value = date.toISOString();
-     
-    document.getElementById('btn_convert').addEventListener('click', sendData);
- function sendData(e) {
-        e.preventDefault();
-        const val = document.querySelector('#val').value;
-        
-        fetch('/add', {
-            method: 'POST',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                val: val
+        var slideSource = document.getElementById('res');
+
+        var date = new Date();
+        document.getElementById('btn1').textContent = date.toISOString();
+        document.getElementById('btn2').textContent = Math.trunc(date/1000)
+
+        document.getElementsByClassName('example')[0].addEventListener('click', function(e){
+            // console.log(this.textContent)
+            inputval.value=this.textContent
+        })
+
+        document.getElementById('btn_convert').addEventListener('click', e=>{
+            e.preventDefault();
+
+            fetch('/convertpost', {
+                method: 'POST',
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    inputval: inputval.value
+                })
             })
+                .then(res => res.json())
+                .then(data => {
+                    const {
+                        result
+                    } = data;
+                    slideSource.textContent = result
+                    if (slideSource.className) {
+                        slideSource.className = '';
+                    } else {
+                        slideSource.className = 'fade';
+                    }
+                    console.log(result)
+                })
+                .catch(err => console.log(err));
+            //console.log('end')
         })
-        .then(res => res.json())
-        .then(data => {
-            const {
-                result
-            } = data;
-            slideSource.textContent = result
-            if(slideSource.className){
-        slideSource.className = '';
-    } else {
-        slideSource.className = 'fade';
-    }
-            // console.log(result)
-        })
-        .catch(err => console.log(err));
-   //console.log('end')
-}
-</script>
-<script src="assets/base.js"></script>
+    </script>
+    <script src="assets/base.js"></script>
 
 </body>
 

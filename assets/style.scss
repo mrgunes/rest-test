@@ -1,17 +1,19 @@
 #slideSource {
   opacity: 1;
-  transition: opacity 1s; 
+  transition: opacity 1s;
 }
 
 #slideSource.fade {
   opacity: 0;
 }
-footer {
+footer,
+#ghlink {
   margin-top: 60px;
 }
 
-h3,h4 {
+h3,h4,div#margin,header {
   margin-bottom: 40px;
+  margin-top: 40px;
 }
 li {
   float: left;

@@ -1,8 +1,21 @@
 // document.addEventListener("DOMContentLoaded",()=>{
+whref = window.location.href
+whost = window.location.host
+urlpath_sp = whref.split(whost)[1]
+// console.log(whref, whost, urlpath_sp)
+
+ghlink = document.getElementById('ghlink')
+a = document.createElement('a')
+a.textContent = 'Source on Github'
+a.href = 'https://github.com/tik9/rest-test/blob/master/' + urlpath_sp + '.html'
+if (urlpath_sp != '/') {
+    ghlink.appendChild(a)
+}
 
 links_arr = {
     Home: '/',
-    'Date converter': 'convert',
+    'Date converter': 'convertdate',
+    'Calculate': 'calculate',
     'Buy me a coffee': 'https://www.buymeacoffee.com/tik1',
     Github: 'https://github.com/tik9/rest-test',
     Games: 'https://tik9.github.io/game',
@@ -18,7 +31,7 @@ Object.keys(links_arr).forEach(key => {
     a.href = links_arr[key]
     a.textContent = key
 })
-document.querySelector('footer').appendChild(ul)
+document.querySelector('header').appendChild(ul)
 
 
 title = 'Tiko\'s'
@@ -33,5 +46,6 @@ document.write('<script src="http://' + (location.host || 'localhost').split(':'
 document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">')
 document.write('<link rel=stylesheet href=assets/style.css>')
 
+document.write('<link rel=icon href=https://github.com/github.png/>')
 
 // })

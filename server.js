@@ -5,11 +5,10 @@
 const path = require("path");
 
 const express = require("express");
-const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static(__dirname + "/public"));
 
 app.use('/assets', express.static('assets'))
@@ -19,7 +18,7 @@ app.post('/login', function (req, res) {
 },
 );
 
-app.post("/convert", function (req, res, next) {
+app.post("/convertmd", function (req, res, next) {
   console.log(req.body);
   if (typeof req.body.content == 'undefined' || req.body.content == null) {
     res.json(['error', 'No data']);
@@ -33,19 +32,33 @@ app.get('/', (req, res) => {
 });
 
 app.get("/convertdate", (req, res) => {
-  res.sendFile(path.join(__dirname, "convertdate.html"));
+  res.sendFile(path.join(__dirname, 'convertdate.html'));
 });
-app.post('/add', (req, res) => {
 
-  const { val } = req.body;
-  date_ = val.split('T')[0]
-  yyyy = date_.split('-')[0]
-  mm = date_.split('-')[1]
-  dd = date_.split('-')[2]
-  date_ = dd + "/" + mm + "/" + yyyy;
+app.get("/calculate", (req, res) => {
+  res.sendFile(path.join(__dirname, 'calculate.html'));
+});
+
+app.post('/convertpost', (req, res) => {
+
+  const { inputval } = req.body;
+  if (inputval.includes('T')) {
+    date_ = inputval.split('T')[0]
+    yyyy = date_.split('-')[0]
+    mm = date_.split('-')[1]
+    dd = date_.split('-')[2]
+  } else {
+    date_ = new Date(inputval * 1000)
+    dd = date_.getDate()
+    mm = date_.getMonth() + 1
+    yyyy = date_.getFullYear()
+
+  }
+  dat = dd + "." + mm + "." + yyyy;
+  // dat = date_
 
   res.send({
-    result: date_
+    result: dat
 
   });
 });
