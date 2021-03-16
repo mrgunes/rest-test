@@ -40,12 +40,22 @@ header.textContent = title;
 
 document.title = title
 
-document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
-    ':35729/livereload.js?snipver=1"></' + 'script>')
+head = document.querySelector('head')
 
-document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">')
-document.write('<link rel=stylesheet href=assets/style.css>')
+livereload = document.createElement('script')
+livereload.src = 'http://localhost:35729/livereload.js?snipver=1'
+head.appendChild(livereload)
+icon = document.createElement('link');
+icon.rel = 'icon'
+icon.href = 'https://github.com/github.png'
+head.appendChild(icon)
 
-document.write('<link rel=icon href=https://github.com/github.png/>')
+boots = document.createElement('link')
+boots.rel = 'stylesheet'
+boots.href = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
+head.appendChild(boots)
 
-// })
+css = document.createElement('link')
+css.rel = 'stylesheet'
+css.href = 'assets/style.css'
+head.appendChild(css)

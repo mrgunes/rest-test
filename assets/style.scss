@@ -1,3 +1,8 @@
+.container{
+  max-width:580px;
+  margin:0 auto;/*make it centered : top right, bottom l*/
+}
+
 #slideSource {
   opacity: 1;
   transition: opacity 1s;

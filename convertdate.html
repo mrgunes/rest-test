@@ -4,14 +4,17 @@
     <div class=container>
         <h3></h3>
         <header></header>
-        <h4>Date Convert</h4>
+        <br>
+        <h4>Convert Date </h4>
 
-        <div class="col-auto"> <label for=inputval>Date</label>
+        <div class="form-group mb-2"> 
+            <label for=inputval>Date</label>
             <input id=inputval class="form-control" placeholder="date in ISO Format or in seconds">
         </div>
-        <button id=btn_convert class='btn btn-primary'>Convert!</button>
-Example ISO: <button id=btn1 class='example btn'></button>
-        Sec.:<button id=btn2 class="example btn"></button>
+
+        <button id=btn_convert class='btn btn-primary mb-2'>Convert!</button>
+Example ISO: <button id=btn1 class='example btn mb-2'></button>
+        Seconds:<button id=btn2 class="example btn mb-2"></button>
         <div id=res style=margin:30px>Res</div>
 
         <div id=ghlink></div>
@@ -46,19 +49,19 @@ Example ISO: <button id=btn1 class='example btn'></button>
                     inputval: inputval.value
                 })
             })
-                .then(res => res.json())
-                .then(data => {
-                    const {
-                        result
-                    } = data;
-                    slideSource.textContent = result
-                    if (slideSource.className) {
-                        slideSource.className = '';
-                    } else {
-                        slideSource.className = 'fade';
-                    }
-                    console.log(result)
-                })
+                .then(res => {console.log(res.json())})
+                // .then(data => {
+                //     const {
+                //         result
+                //     } = data;
+                //     slideSource.textContent = result
+                //     if (slideSource.className) {
+                //         slideSource.className = '';
+                //     } else {
+                //         slideSource.className = 'fade';
+                //     }
+                //     console.log(result)
+                // })
                 .catch(err => console.log(err));
             //console.log('end')
         })

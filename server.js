@@ -41,21 +41,22 @@ app.get("/calculate", (req, res) => {
 
 app.post('/convertpost', (req, res) => {
 
-  const { inputval } = req.body;
-  if (inputval.includes('T')) {
-    date_ = inputval.split('T')[0]
-    yyyy = date_.split('-')[0]
-    mm = date_.split('-')[1]
-    dd = date_.split('-')[2]
-  } else {
-    date_ = new Date(inputval * 1000)
-    dd = date_.getDate()
-    mm = date_.getMonth() + 1
-    yyyy = date_.getFullYear()
+  // const { inputval } = JSON.stringify(req.body)
+  const { inputval } = req.body
+  // if (inputval.includes('T')) {
+  //   date_ = inputval.split('T')[0]
+  //   yyyy = date_.split('-')[0]
+  //   mm = date_.split('-')[1]
+  //   dd = date_.split('-')[2]
+  // } else {
+  //   date_ = new Date(inputval * 1000)
+  //   dd = date_.getDate()
+  //   mm = date_.getMonth() + 1
+  //   yyyy = date_.getFullYear()
 
-  }
-  dat = dd + "." + mm + "." + yyyy;
-  // dat = date_
+  // }
+  // dat = dd + "." + mm + "." + yyyy;
+  dat = inputval
 
   res.send({
     result: dat
