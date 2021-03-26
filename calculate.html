@@ -50,7 +50,6 @@
             result.value = ''
         })
 
-
         equal = doc.createElement('button')
         equal.textContent = '='
         equal.style.fontweight = '1000'
@@ -66,8 +65,6 @@
             button.className = 'btn'
             docFrag.appendChild(button);
             button.addEventListener('click', e => {
-                // console.clear()
-                // console.log(e.currentTarget)
                 result.value += e.currentTarget.textContent
             })
             if (x % 3 == 0) {

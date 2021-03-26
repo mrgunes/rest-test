@@ -1,14 +1,14 @@
 
-
-//app.post("/ad", (req,res) => {
-
 const path = require("path");
+const showdown = require('showdown');
 
 const express = require("express");
 
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded());
+
 app.use(express.static(__dirname + "/public"));
 
 app.use('/assets', express.static('assets'))
@@ -18,12 +18,20 @@ app.post('/login', function (req, res) {
 },
 );
 
+converter = new showdown.Converter()
+
 app.post("/convertmd", function (req, res, next) {
-  console.log(req.body);
+
+  text = req.body.content
+
   if (typeof req.body.content == 'undefined' || req.body.content == null) {
     res.json(['error', 'No data']);
   } else {
-    res.json(['markdown', req.body.content]);
+    converter.setOption('simplifiedAutoLink', 'true');
+    html=converter.makeHtml(text)
+
+    res.json(['markdown', html]);
+
   }
 });
 
@@ -65,5 +73,5 @@ app.post('/convertpost', (req, res) => {
 });
 
 app.listen(5000, () => {
-  console.log(`Server is running on port 5000.`);
+  console.log(`Server on port 5000.`);
 });

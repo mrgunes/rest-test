@@ -3,16 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "nodemon server.js -e js,css,html,jpg,png,scss",
-    "sass": "node-sass -w assets -o assets"
+    "sass": "node-sass -w assets -o assets",
+    "build": "browserify assets/func.js -o assets/bundle.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "node-sass": "^5.0.0"
+    "jest": "^26.6.3",
+    "node-sass": "^5.0.0",
+    "showdown": "^1.9.1"
   },
-  "description": "calculator, date-converter, markdown"
+  "description": "calculator, date-converter, markdown",
+  "development": [
+    "ie 11",
+    "last 1 chrome version"
+  ]
 }
