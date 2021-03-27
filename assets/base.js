@@ -13,9 +13,9 @@ if (urlpath_sp != '/') {
 }
 
 links_arr = {
-    Home: '/',
-    'Date converter': 'convertdate',
-    'Calculate': 'calculate',
+    Home: 'README.html',
+    'Date converter': 'convertdate.html',
+    'Calculate': 'calculate.html',
     'Buy me a coffee': 'https://www.buymeacoffee.com/tik1',
     Github: 'https://github.com/tik9/rest-test',
     Games: 'https://tik9.github.io/game',
