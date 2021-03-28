@@ -25,14 +25,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('public'));
-
-app.use('/assets', express.static('assets'))
+app.use(express.static('assets'))
 
 converter = new showdown.Converter()
 
 
 app.get('', (req, res) => {
-  res.sendFile(path.join(__dirname, 'README.html'));
+  res.sendFile(path.join('public', 'README.html'));
 });
 
 app.use('/', routes)
@@ -40,16 +39,15 @@ app.use('/', routes)
 // /user/profile
 app.use('/u', passport.authenticate('jwt', { session: false }), sec_route);
 
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.json({ error: err });
+app.use((error, req, res, next) => {
+  res.status(500).json({ error: error.toString() });
 });
 
 app.post('/login', function (req, res) {
   res.send('Authenticated');
 });
 
-app.post("/convertmd",
+app.post('/convertmd',
   // passport.authenticate('local', { session: false, failWithError: true }),
   function (req, res, next) {
     text = req.body.content
@@ -59,7 +57,7 @@ app.post("/convertmd",
     } else {
       converter.setOption('simplifiedAutoLink', 'true');
       html = converter.makeHtml(text)
-      res.json(['markdown', html]);
+      res.json( html);
     }
   },
   function (err, req, res, next) {
@@ -67,12 +65,11 @@ app.post("/convertmd",
   });
 
 
-app.post('/convertdate', (req, res,next) => {
-  var error=''
-  // const { inputval } = JSON.stringify(req.body.content)
-  // const { inputval } = req.body.content
+app.post('/convertdate', (req, res, next) => {
+  var error = ''
+
   const inputval = req.body.content
-  if (Number.isInteger(inputval)) {
+  if (/^\d+$/.test(inputval)) {
     // 1_000_000_000' =10^9 = 2001
     date_ = new Date(inputval * 1000)
     dd = date_.getDate()
@@ -80,27 +77,25 @@ app.post('/convertdate', (req, res,next) => {
     yyyy = date_.getFullYear()
 
   }
-  else if (inputval.includes('T')) {
+    else if (/^\d{4}-\d{2}-\d{2}T\d{2}/.test(inputval)) {
     date_ = inputval.split('T')[0]
     yyyy = date_.split('-')[0]
     mm = date_.split('-')[1]
     dd = date_.split('-')[2]
   }
   else {
-    next('this is error') 
+    next('this is an error')
   }
   dat = dd + "." + mm + "." + yyyy;
 
-  // }
-  // dat = inputval
-
   res.json({
-    result: dat,
+    // result: inputval ,
+    result: dat ,
     error: error
-    // result:req.body.content
   });
 });
 
+
 app.listen(5000, () => {
-  console.log(`Server on port 5000.`);
+  console.log(`Api on port 5000.`);
 });

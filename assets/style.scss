@@ -1,6 +1,6 @@
-.container{
-  max-width:580px;
-  margin:0 auto;/*make it centered : top right, bottom l*/
+.container {
+  max-width: 580px;
+  margin: 0 auto; /*make it centered : top right, bottom l*/
 }
 
 #slideSource {
@@ -16,11 +16,18 @@ footer,
   margin-top: 60px;
 }
 
-h3,h4,div#margin,header {
+// h3,h4,div#margin,header {
+h3,
+h4,
+.margin,
+header {
   margin-bottom: 40px;
   margin-top: 40px;
 }
 li {
   float: left;
   margin: 0 15px;
+}
+textarea{
+  // width:100px
 }

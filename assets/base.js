@@ -1,21 +1,28 @@
-// document.addEventListener("DOMContentLoaded",()=>{
 whref = window.location.href
 whost = window.location.host
-urlpath_sp = whref.split(whost)[1]
-// console.log(whref, whost, urlpath_sp)
+urlpathSplit = whref.split(whost)[1]
+fileName = urlpathSplit.split('.')[0]
+
+sndPart = fileName.split('convert')[1]
+h4 = document.querySelector('h4')
+h4.textContent = fileName[1].toUpperCase() + fileName.slice(2)
+if (sndPart) {
+    h4.textContent = 'Convert ' + sndPart
+}
+// console.log(whref, whost, urlpathSplit, sndPart)
 
 ghlink = document.getElementById('ghlink')
 a = document.createElement('a')
 a.textContent = 'Source on Github'
-a.href = 'https://github.com/tik9/rest-test/blob/master/' + urlpath_sp + '.html'
-if (urlpath_sp != '/') {
-    ghlink.appendChild(a)
-}
+a.href = 'https://github.com/tik9/rest-test/blob/master' + urlpathSplit
+// if (urlpathSplit != '/') {
+ghlink.appendChild(a)
 
 links_arr = {
     Home: 'README.html',
     'Date converter': 'convertdate.html',
     'Calculate': 'calculate.html',
+    'Markdown Convert': 'convertmarkdown.html',
     'Buy me a coffee': 'https://www.buymeacoffee.com/tik1',
     Github: 'https://github.com/tik9/rest-test',
     Games: 'https://tik9.github.io/game',
@@ -45,6 +52,7 @@ head = document.querySelector('head')
 livereload = document.createElement('script')
 livereload.src = 'http://localhost:35729/livereload.js?snipver=1'
 head.appendChild(livereload)
+
 icon = document.createElement('link');
 icon.rel = 'icon'
 icon.href = 'https://github.com/github.png'
@@ -52,10 +60,13 @@ head.appendChild(icon)
 
 boots = document.createElement('link')
 boots.rel = 'stylesheet'
-boots.href = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
+boots.href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+
 head.appendChild(boots)
 
 css = document.createElement('link')
 css.rel = 'stylesheet'
-css.href = 'assets/style.css'
+css.href = 'style.css'
 head.appendChild(css)
+footer=document.querySelector('footer')
+footer.textContent=title+' made in 2021'
