@@ -2,6 +2,7 @@ whref = window.location.href
 whost = window.location.host
 urlpathSplit = whref.split(whost)[1]
 fileName = urlpathSplit.split('.')[0]
+localhost=whost.split(':')[0]
 
 sndPart = fileName.split('convert')[1]
 h4 = document.querySelector('h4')
@@ -19,12 +20,10 @@ a.href = 'https://github.com/tik9/rest-test/blob/master' + urlpathSplit
 ghlink.appendChild(a)
 
 links_arr = {
-    Home: 'README.html',
-    'Date converter': 'convertdate.html',
-    'Calculate': 'calculate.html',
-    'Markdown Convert': 'convertmarkdown.html',
+    Home: '/public/README.html',
+    'Markdown Convert': '/public/convertmarkdown.html',
     'Buy me a coffee': 'https://www.buymeacoffee.com/tik1',
-    Github: 'https://github.com/tik9/rest-test',
+    Github: 'https://github.com/tik9/tik9.github.io',
     Games: 'https://tik9.github.io/game',
 }
 
