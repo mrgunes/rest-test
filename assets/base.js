@@ -1,16 +1,28 @@
-whref = window.location.href
-whost = window.location.host
-urlpathSplit = whref.split(whost)[1]
-fileName = urlpathSplit.split('.')[0]
-localhost=whost.split(':')[0]
+// console.log(1)
+{/* <i class="fas fa-home"></i> */}
+// https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css
 
-sndPart = fileName.split('convert')[1]
-h4 = document.querySelector('h4')
-h4.textContent = fileName[1].toUpperCase() + fileName.slice(2)
-if (sndPart) {
-    h4.textContent = 'Convert ' + sndPart
+function replaceGlobal(orig, search, replace) {
+    regex = new RegExp(search, 'g')
+    return orig.replace(regex, replace)
 }
-// console.log(whref, whost, urlpathSplit, sndPart)
+whref = window.location.href;whost = window.location.host
+urlpathSplit = whref.split(whost)[1]
+fileNameTmp = urlpathSplit.split('.')[0];localhost = whost.split(':')[0]
+
+
+h4 = document.querySelector('h4')
+if (fileNameTmp != '/') {fileName=fileNameTmp.split('public/')[1]}
+else {  fileName='Home_'}
+console.log('fn',fileName)
+
+console.log(whref, whost, urlpathSplit, 'filename', 
+fileName,'fn2')
+console.log('fn',fileName)
+
+
+fileName = replaceGlobal(fileName, '_', ' ')
+h4.textContent = fileName[0].toUpperCase() + fileName.slice(1)
 
 ghlink = document.getElementById('ghlink')
 a = document.createElement('a')
@@ -20,11 +32,8 @@ a.href = 'https://github.com/tik9/rest-test/blob/master' + urlpathSplit
 ghlink.appendChild(a)
 
 links_arr = {
-    Home: '/public/README.html',
-    'Markdown Convert': '/public/convertmarkdown.html',
-    'Buy me a coffee': 'https://www.buymeacoffee.com/tik1',
-    Github: 'https://github.com/tik9/tik9.github.io',
-    Games: 'https://tik9.github.io/game',
+    Home: '/public/index.html',
+    'Markdown': '/public/test_md_client.html',
 }
 
 ul = document.createElement('ul')
@@ -59,13 +68,13 @@ head.appendChild(icon)
 
 boots = document.createElement('link')
 boots.rel = 'stylesheet'
-boots.href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+boots.href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 
 head.appendChild(boots)
 
 css = document.createElement('link')
 css.rel = 'stylesheet'
-css.href = 'style.css'
+css.href = '/assets/style.css'
 head.appendChild(css)
-footer=document.querySelector('footer')
-footer.textContent=title+' made in 2021'
+footer = document.querySelector('footer')
+footer.textContent = title + ' made in 2021'

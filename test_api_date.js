@@ -16,6 +16,6 @@ Request.post({
     // console.dir(JSON.parse(body));
     // console.dir(JSON.stringify(body));
     var obj=JSON.parse(body)
-    console.log(obj.result);
-    console.dir(body);
+    console.log('obj.result',obj.result);
+    console.dir('body',body);
 });

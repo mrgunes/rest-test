@@ -1,3 +1,4 @@
+
 var Request = require("request");
 
 // Start of markdown
@@ -27,5 +28,5 @@ Request.post({
     if (error) {
         return console.log(error);
     }
-    console.dir(JSON.parse(body));
+    console.dir('JSON.parse(body)',JSON.parse(body));
 });
