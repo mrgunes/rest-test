@@ -4,8 +4,6 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server.js -e js,css,html,scss",
-    "sass": "node-sass -w assets -o assets",
     "build": "browserify main.js -o assets/bundle.js",
     "dev": "start nodemon server.js -e js,css,html,scss && start node-sass -w assets -o assets"
   },

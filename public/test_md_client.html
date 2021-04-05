@@ -1,35 +1,15 @@
-<!-- <meta http-equiv="refresh" content="0; url=README.html" /> -->
-<html>
-<head>
-
-<script>
-</script>
-</head>
-<body>
-
-<!-- <pre><script> -->
-<!-- </script></pre> -->
-
-<div class="container">
-
-    <h3></h3>
-
-    <header></header>
-    <br>
-    <h4></h4>
-    
+<div id=main>
     <h4>Md Input</h4>
     <div id=md></div>
     <h4>Raw html Output</h4>
     <div id=rawhtml></div>
     <h4>Html Final</h4>
     <div id=html></div>
-    <div id=present></div>
-    <div id=ghlink></div>
-
-    <footer></footer>
 </div>
+
+<script src="/assets/links.js"></script>
 <script src=/assets/bundle.js></script>
+<script src=/assets/base.js></script>
 <script>
     var converter = new showdown.Converter()
 
@@ -37,21 +17,12 @@
         '|:------|:-------:|--------:|\n' +
         '| 100   | [a][1]  | ![b][2] |'
 
-    a ={f: converter.setOption('tables', true)};
-    b=converter.setOption('tablesHeaderId', true);
+    a = { f: converter.setOption('tables', true) };
+    b = converter.setOption('tablesHeaderId', true);
 
     html = converter.makeHtml(text);
-    // present=a.f.toString()
-    // document.querySelector('#present').textContent=present
-    // document.querySelector('present')=a
     document.querySelector('#md').textContent = text
     document.querySelector('#rawhtml').textContent = html
     document.querySelector('#html').innerHTML = html
     // console.log('original text\n', text)
 </script>
-
-<script src="/assets/base.js"></script>
-
-</body>
-
-</html>
